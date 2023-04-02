@@ -9,15 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.R
 import com.main.models.Brand
+import com.main.sevices.BrandService
 import java.util.*
 import kotlin.collections.ArrayList
+import org.koin.java.KoinJavaComponent.inject
 
-class BrandsRecyclerViewAdapter (private val mBrands: ArrayList<Brand>) : RecyclerView.Adapter<BrandsRecyclerViewAdapter.ViewHolder>() {
-
-    //copy the initial list
-    val initialList = ArrayList<Brand>().apply {
-        addAll(mBrands)
-    }
+class BrandsRecyclerViewAdapter (private val mBrands: ArrayList<Brand>, private val brandService: BrandService) : RecyclerView.Adapter<BrandsRecyclerViewAdapter.ViewHolder>() {
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
@@ -55,7 +52,7 @@ class BrandsRecyclerViewAdapter (private val mBrands: ArrayList<Brand>) : Recycl
     public fun filterBrands(filter: String) {
         val filteredBrands = ArrayList<Brand>()
 
-        for(brand in initialList){
+        for(brand in brandService.getBrands()){
             if(brand.name.lowercase().contains(filter.lowercase()))
                 filteredBrands.add(brand)
         }

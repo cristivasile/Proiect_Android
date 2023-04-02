@@ -12,6 +12,8 @@ import com.example.androidproject.R
 import com.example.androidproject.databinding.VehiclesBrandsFragmentBinding
 import com.main.adapters.BrandsRecyclerViewAdapter
 import com.main.models.Brand
+import com.main.sevices.BrandService
+import org.koin.android.ext.android.inject
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -22,6 +24,7 @@ class VehicleBrandsFragment : Fragment() {
     private lateinit var brands: ArrayList<Brand>
     private lateinit var recyclerView: RecyclerView;
     private lateinit var recyclerAdapter: BrandsRecyclerViewAdapter;
+    private val brandService : BrandService by inject()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -41,11 +44,9 @@ class VehicleBrandsFragment : Fragment() {
 
         // Lookup the recyclerview in activity layout
         recyclerView = view.findViewById<View>(R.id.brands_list) as RecyclerView
-        // Initialize contacts
-        brands = Brand.createBrandsList()
 
-        // Create adapter passing in the sample user data
-        recyclerAdapter = BrandsRecyclerViewAdapter(brands)
+        // Create adapter passing in brands
+        recyclerAdapter = BrandsRecyclerViewAdapter(brandService.getBrands(), brandService)
         // Attach the adapter to the recyclerview to populate items
         recyclerView.adapter = recyclerAdapter
         // Set layout manager to position the items
