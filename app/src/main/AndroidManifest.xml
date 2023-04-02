@@ -12,7 +12,7 @@
         android:theme="@style/Theme.AndroidProject"
         tools:targetApi="31">
         <activity
-            android:name=".VehiclesActivity"
+            android:name="com.main.VehiclesActivity"
             android:exported="true"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
             <intent-filter>

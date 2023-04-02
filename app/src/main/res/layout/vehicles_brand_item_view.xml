@@ -6,7 +6,7 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/city_code"
+        android:id="@+id/brand_image"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="12dp"
@@ -15,7 +15,7 @@
         tools:text="DL" />
 
     <TextView
-        android:id="@+id/city_name"
+        android:id="@+id/brand_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
