@@ -12,6 +12,7 @@ import com.example.androidproject.R
 import com.example.androidproject.databinding.VehiclesActivityBinding
 import com.main.repositories.appModule
 import com.main.sevices.BrandService
+import com.main.sevices.ModelService
 import org.koin.android.ext.android.inject
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -20,6 +21,7 @@ class VehiclesActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: VehiclesActivityBinding
     private val brandService : BrandService by inject()
+    private val modelService : ModelService by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +32,9 @@ class VehiclesActivity : AppCompatActivity() {
 
         //initialize brands
         brandService.setBrands(brandService.getDefaultBrands())
-
+        //initialize models
+        modelService.setModels(modelService.getDefaultModels())
+        
         binding = VehiclesActivityBinding
             .inflate(layoutInflater)
         setContentView(binding.root)

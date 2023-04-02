@@ -7,12 +7,15 @@ interface IBrandRepository {
     fun getAll(): ArrayList<Brand>
     fun addBrands(brands : List<Brand>)
     fun setBrands(brands: List<Brand>)
+    fun setSelectedBrand(brandName: String)
+    fun getSelectedBrand(): Brand
     fun getDefault(): ArrayList<Brand>
 }
 
 class BrandRepository : IBrandRepository{
 
     private val _brands = arrayListOf<Brand>()
+    private var _selectedBrand: Brand? = null
 
     override fun getAll(): ArrayList<Brand> {
         return _brands;
@@ -25,6 +28,21 @@ class BrandRepository : IBrandRepository{
     override fun setBrands(brands: List<Brand>) {
         _brands.clear()
         _brands.addAll(brands)
+    }
+
+    override fun setSelectedBrand(brandName: String) {
+        for (brand in _brands)
+            if (brand.name.lowercase() == brandName.lowercase())
+                _selectedBrand = brand
+
+        throw Exception("No brand with the given name was found!")
+    }
+
+    override fun getSelectedBrand(): Brand {
+        if(_selectedBrand == null)
+            throw Exception("Selected brand was null!")
+
+        return _selectedBrand as Brand
     }
 
     override fun getDefault(): ArrayList<Brand> {
