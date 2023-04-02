@@ -10,20 +10,27 @@
         android:id="@+id/brand_image"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_margin="12dp"
+        android:layout_margin="10dp"
         android:contentDescription="@string/brand_image"
         android:gravity="center"
         android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:background="@color/white"
         android:id="@+id/brand_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="20dp"
         android:layout_marginStart="20dp"
-        android:textSize="20sp"
+        android:paddingTop = "10dp"
+        android:paddingStart = "5dp"
+        android:paddingEnd = "5dp"
+        android:paddingBottom = "10dp"
+        android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@+id/brand_image"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Brand" />
@@ -32,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_marginTop="16dp"
+        android:background="@color/main_dark"
         app:layout_constraintTop_toBottomOf="@+id/brand_name"
         tools:layout_editor_absoluteX="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
