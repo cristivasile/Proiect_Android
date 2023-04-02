@@ -34,7 +34,7 @@ class VehiclesActivity : AppCompatActivity() {
         brandService.setBrands(brandService.getDefaultBrands())
         //initialize models
         modelService.setModels(modelService.getDefaultModels())
-        
+
         binding = VehiclesActivityBinding
             .inflate(layoutInflater)
         setContentView(binding.root)
