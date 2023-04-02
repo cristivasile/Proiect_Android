@@ -9,7 +9,7 @@
     tools:context="com.main.VehiclesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/background_animation"
+        android:id="@+id/background_animation_color"
         android:layout_width="210dp"
         android:layout_height="210dp"
         android:background="@drawable/splash_background"
@@ -40,7 +40,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
-
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
