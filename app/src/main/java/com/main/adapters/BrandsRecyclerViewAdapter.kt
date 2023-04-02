@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.R
@@ -24,7 +24,8 @@ class BrandsRecyclerViewAdapter (private val mBrands: ArrayList<Brand>) : Recycl
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Your holder should contain and initialize a member variable
         // for any view that will be set as you render a row
-        val nameTextView: TextView = itemView.findViewById(R.id.brand_name)
+        val brandTextView: TextView = itemView.findViewById(R.id.brand_name)
+        val brandImageView: ImageView = itemView.findViewById(R.id.brand_image)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,12 +42,13 @@ class BrandsRecyclerViewAdapter (private val mBrands: ArrayList<Brand>) : Recycl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // TODO - image
         // Get the data model based on position
         val brand: Brand = mBrands[position]
         // Set item views based on your views and data model
-        val textView = holder.nameTextView
+        val textView = holder.brandTextView
         textView.text = brand.name
+        val imageView = holder.brandImageView
+        imageView.setImageResource(brand.imageResource)
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
+    <ImageView
         android:id="@+id/brand_image"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="12dp"
+        android:contentDescription="@string/brand_image"
         android:gravity="center"
         android:padding="12dp"
-        tools:text="DL" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/brand_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        tools:text="New Delhi" />
-</LinearLayout>
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/brand_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Brand" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/brand_name"
+        tools:layout_editor_absoluteX="0dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
