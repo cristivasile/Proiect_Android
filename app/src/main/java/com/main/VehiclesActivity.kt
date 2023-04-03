@@ -39,12 +39,15 @@ class VehiclesActivity : AppCompatActivity() {
             .inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+
         //initialize nav drawer
         binding.apply{
             toggle = ActionBarDrawerToggle(this@VehiclesActivity, navDrawerLayout, R.string.open, R.string.close)
             navDrawerLayout.addDrawerListener(toggle)
             toggle.syncState()
 
+            //add menu icon to the action bar
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
             navView.setNavigationItemSelectedListener {
@@ -61,19 +64,13 @@ class VehiclesActivity : AppCompatActivity() {
                 }
                 true
             }
+
         }
-    }
-
-    override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onPostCreate(savedInstanceState, persistentState)
-
 
     }
 
+    //make options item open the navbar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)){
-            true
-        }
-        return super.onOptionsItemSelected(item)
+        return toggle.onOptionsItemSelected(item)
     }
 }

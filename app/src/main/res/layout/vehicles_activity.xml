@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     android:id="@+id/navDrawerLayout">
 
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:menu="@menu/menu_main"
-        app:headerLayout="@layout/nav_drawer_header"
-        android:layout_gravity="start"
-        android:id="@+id/navView"/>
-
     <androidx.constraintlayout.motion.widget.MotionLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/coordinatorLayout"
@@ -97,4 +89,12 @@
             -->
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/menu_main"
+        app:headerLayout="@layout/nav_drawer_header"
+        android:layout_gravity="start"
+        android:id="@+id/navView"/>
 </androidx.drawerlayout.widget.DrawerLayout>
