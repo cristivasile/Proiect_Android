@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Android Project</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_main_string">Main page</string>
+    <string name="action_add_brand_string">Add brand</string>
+    <string name="action_add_model_string">Add model</string>
     <!-- Strings used for fragments for navigation -->
     <string name="vehicle_brands_fragment_label">Select a brand</string>
     <string name="vehicle_models_fragment_label">Select a model</string>
@@ -9,4 +11,7 @@
     <string name="previous">Previous</string>
     <string name="brand_image">brand image</string>
     <string name="background_image_description">background-image</string>
+    <string name="nav_drawer_header_title">Vehicle info app</string>
+    <string name="open">Open nav drawer</string>
+    <string name="close">Close nav drawer</string>
 </resources>

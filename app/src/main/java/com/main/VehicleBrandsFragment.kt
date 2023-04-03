@@ -21,7 +21,6 @@ import org.koin.android.ext.android.inject
 class VehicleBrandsFragment : Fragment() {
 
     private var _binding: VehiclesBrandsFragmentBinding? = null
-    private lateinit var brands: ArrayList<Brand>
     private lateinit var recyclerView: RecyclerView;
     private lateinit var recyclerAdapter: BrandsRecyclerViewAdapter;
     private val brandService : BrandService by inject()

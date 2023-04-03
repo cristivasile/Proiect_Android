@@ -1,84 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/vehicles_activity_scene"
-    tools:context="com.main.VehiclesActivity">
+    android:id="@+id/navDrawerLayout">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/background_animation_color"
-        android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:background="@drawable/splash_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/menu_main"
+        app:headerLayout="@layout/nav_drawer_header"
+        android:layout_gravity="start"
+        android:id="@+id/navView"/>
 
-    <ImageView
-        android:id="@+id/background_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:contentDescription="@string/background_image_description"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/vehicles_activity_scene"
+        tools:context="com.main.VehiclesActivity">
 
-    <ImageView
-        android:id="@+id/background_image_white"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:contentDescription="@string/background_image_description"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/background_animation_color"
+            android:layout_width="210dp"
+            android:layout_height="210dp"
+            android:background="@drawable/splash_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="202dp"
-        android:theme="@style/Theme.AndroidProject.AppBarOverlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/background_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/background_image_description"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <ImageView
+            android:id="@+id/background_image_white"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/background_image_description"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="202dp"
+            android:theme="@style/Theme.AndroidProject.AppBarOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/Theme.AndroidProject.PopupOverlay" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/vehicles_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+
+        <!--
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.AndroidProject.PopupOverlay" />
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@android:drawable/ic_dialog_email" />
+            -->
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/vehicles_content"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
-    <!--
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-        -->
-
-</androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

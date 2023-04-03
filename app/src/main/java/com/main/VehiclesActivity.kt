@@ -1,13 +1,12 @@
 package com.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
+import android.os.PersistableBundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.androidproject.R
 import com.example.androidproject.databinding.VehiclesActivityBinding
 import com.main.repositories.appModule
@@ -18,14 +17,15 @@ import org.koin.core.context.GlobalContext.startKoin
 
 class VehiclesActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: VehiclesActivityBinding
+    private lateinit var toggle: ActionBarDrawerToggle
     private val brandService : BrandService by inject()
     private val modelService : ModelService by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //initialize koin
         startKoin {
             modules(appModule)
         }
@@ -39,40 +39,41 @@ class VehiclesActivity : AppCompatActivity() {
             .inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        //initialize nav drawer
+        binding.apply{
+            toggle = ActionBarDrawerToggle(this@VehiclesActivity, navDrawerLayout, R.string.open, R.string.close)
+            navDrawerLayout.addDrawerListener(toggle)
+            toggle.syncState()
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        /*
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            navView.setNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.action_main -> {
+                        Log.d("Debug", "Main action clicked")
+                    }
+                    R.id.action_add_brand -> {
+                        Log.d("Debug", "Add brand action clicked")
+                    }
+                    R.id.action_add_model -> {
+                        Toast.makeText(this@VehiclesActivity, "First Item Clicked", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                true
+            }
         }
-        */
-
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onPostCreate(savedInstanceState, persistentState)
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        if (toggle.onOptionsItemSelected(item)){
+            true
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        return super.onOptionsItemSelected(item)
     }
 }
