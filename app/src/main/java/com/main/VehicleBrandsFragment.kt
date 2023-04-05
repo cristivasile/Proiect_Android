@@ -45,7 +45,7 @@ class VehicleBrandsFragment : Fragment() {
         recyclerView = view.findViewById<View>(R.id.brands_list) as RecyclerView
 
         // Create adapter passing in brands
-        recyclerAdapter = BrandsRecyclerViewAdapter(brandService.getBrands(), brandService)
+        recyclerAdapter = BrandsRecyclerViewAdapter(brandService)
         // Attach the adapter to the recyclerview to populate items
         recyclerView.adapter = recyclerAdapter
         // Set layout manager to position the items

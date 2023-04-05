@@ -24,7 +24,7 @@ class BrandRepository : IBrandRepository{
     private var _selectedBrand: Brand? = null
 
     override fun getAll(): ArrayList<Brand> {
-        return _brands;
+        return ArrayList(_brands);
     }
 
     override fun addBrand(brand : Brand) {

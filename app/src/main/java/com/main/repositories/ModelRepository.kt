@@ -17,7 +17,7 @@ class ModelRepository: IModelRepository {
     private val _models = arrayListOf<Model>()
 
     override fun getAll(): ArrayList<Model> {
-        return _models;
+        return ArrayList(_models);
     }
 
     override fun getModelsByBrand(brand: Brand): ArrayList<Model> {

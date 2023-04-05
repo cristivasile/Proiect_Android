@@ -14,7 +14,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 import org.koin.java.KoinJavaComponent.inject
 
-class BrandsRecyclerViewAdapter (private val mBrands: ArrayList<Brand>, private val brandService: BrandService) : RecyclerView.Adapter<BrandsRecyclerViewAdapter.ViewHolder>() {
+class BrandsRecyclerViewAdapter (private val brandService: BrandService) : RecyclerView.Adapter<BrandsRecyclerViewAdapter.ViewHolder>() {
+
+    private val brands: ArrayList<Brand> = brandService.getBrands()
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
@@ -35,12 +37,12 @@ class BrandsRecyclerViewAdapter (private val mBrands: ArrayList<Brand>, private 
     }
 
     override fun getItemCount(): Int {
-        return mBrands.count()
+        return brands.count()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Get the data model based on position
-        val brand: Brand = mBrands[position]
+        val brand: Brand = brands[position]
         // Set item views based on your views and data model
         val textView = holder.brandTextView
         textView.text = brand.name
@@ -50,15 +52,10 @@ class BrandsRecyclerViewAdapter (private val mBrands: ArrayList<Brand>, private 
 
     @SuppressLint("NotifyDataSetChanged")
     public fun filterBrands(filter: String) {
-        val filteredBrands = ArrayList<Brand>()
+        val filteredBrands = brandService.getBrands().filter { brand -> brand.name.lowercase().contains(filter.lowercase()) }
 
-        for(brand in brandService.getBrands()){
-            if(brand.name.lowercase().contains(filter.lowercase()))
-                filteredBrands.add(brand)
-        }
-
-        mBrands.clear()
-        mBrands.addAll(filteredBrands)
+        brands.clear()
+        brands.addAll(filteredBrands)
         notifyDataSetChanged()
     }
 }
