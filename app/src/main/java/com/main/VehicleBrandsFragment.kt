@@ -32,7 +32,7 @@ class VehicleBrandsFragment : Fragment() {
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = VehiclesBrandsFragmentBinding.inflate(inflater, container, false)
         return binding.root
@@ -68,7 +68,6 @@ class VehicleBrandsFragment : Fragment() {
                 return true
             }
         })
-
     }
 
     override fun onDestroyView() {

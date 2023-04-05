@@ -1,12 +1,11 @@
 package com.main
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.example.androidproject.R
 import com.example.androidproject.databinding.VehiclesActivityBinding
 import com.main.repositories.appModule
@@ -19,6 +18,7 @@ class VehiclesActivity : AppCompatActivity() {
 
     private lateinit var binding: VehiclesActivityBinding
     private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var navController: NavController
     private val brandService : BrandService by inject()
     private val modelService : ModelService by inject()
 
@@ -31,7 +31,7 @@ class VehiclesActivity : AppCompatActivity() {
         }
 
         //initialize brands
-        brandService.setBrands(brandService.getDefaultBrands())
+        brandService.setBrands(brandService.getDefaultBrands(this))
         //initialize models
         modelService.setModels(modelService.getDefaultModels())
 
@@ -50,26 +50,27 @@ class VehiclesActivity : AppCompatActivity() {
             //add menu icon to the action bar
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+            navController = findNavController(R.id.nav_host_fragment_content_main)
+
             navView.setNavigationItemSelectedListener {
                 when (it.itemId) {
                     R.id.action_main -> {
-                        Log.d("Debug", "Main action clicked")
+                        navController.navigate(R.id.BrandsFragment)
                     }
                     R.id.action_add_brand -> {
-                        Log.d("Debug", "Add brand action clicked")
+                        navController.navigate(R.id.AddBrandFragment)
                     }
                     R.id.action_add_model -> {
-                        Toast.makeText(this@VehiclesActivity, "First Item Clicked", Toast.LENGTH_SHORT).show()
+                        navController.navigate(R.id.AddModelFragment)
                     }
                 }
                 true
             }
 
         }
-
     }
 
-    //make options item open the navbar
+    //bind menu icon to set the nav drawer toggle
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return toggle.onOptionsItemSelected(item)
     }

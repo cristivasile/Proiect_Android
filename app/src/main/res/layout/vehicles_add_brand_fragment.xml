@@ -1,0 +1,96 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.main.VehiclesAddBrandFragment"
+    android:background="@color/main">
+
+    <TextView
+        android:id="@+id/addBrandTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:text="@string/add_brand_title"/>
+
+    <ImageView
+        android:id="@+id/background_image_white"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="@string/background_image_description"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <Button
+        android:id="@+id/selectImageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:text="@string/add_brand_select_image_button"
+        style="?attr/materialButtonOutlinedStyle"
+        app:layout_constraintTop_toBottomOf = "@id/addBrandTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:icon="@drawable/image_icon"
+        app:strokeColor="@color/white"
+        android:textColor="@color/white"
+        app:iconTint="@color/white"
+        app:rippleColor="@color/white"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addBrandNameTextLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_brand_name_label"
+        app:layout_constraintTop_toTopOf="@id/selectImageButton"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="70dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addBrandNameTextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/brandPreviewImage"
+        android:contentDescription="@string/add_brand_selected_image_preview"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toBottomOf="@id/addBrandNameTextLayout"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp" />
+
+    <Button
+        android:id="@+id/addBrandButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vehicles_add_brand_button_text"
+        style="?attr/materialButtonOutlinedStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:icon="@drawable/baseline_add_24"
+        app:strokeColor="@color/white"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        app:iconTint="@color/white"
+        app:rippleColor="@color/green"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,21 @@
 package com.main.repositories
 
+import android.content.Context
+import android.content.res.Resources
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import androidx.core.graphics.drawable.toDrawable
 import com.example.androidproject.R
 import com.main.models.Brand
 
 interface IBrandRepository {
     fun getAll(): ArrayList<Brand>
+    fun addBrand(brand : Brand)
     fun addBrands(brands : List<Brand>)
     fun setBrands(brands: List<Brand>)
     fun setSelectedBrand(brandName: String)
     fun getSelectedBrand(): Brand
-    fun getDefault(): ArrayList<Brand>
+    fun getDefault(context: Context): ArrayList<Brand>
 }
 
 class BrandRepository : IBrandRepository{
@@ -19,6 +25,15 @@ class BrandRepository : IBrandRepository{
 
     override fun getAll(): ArrayList<Brand> {
         return _brands;
+    }
+
+    override fun addBrand(brand : Brand) {
+        val filteredBrands = _brands.filter { x -> x.name.lowercase() == brand.name.lowercase() }
+
+        if (filteredBrands.isNotEmpty())
+            throw Exception("Brand already exists")
+
+        _brands.add(brand);
     }
 
     override fun addBrands(brands : List<Brand>) {
@@ -45,23 +60,37 @@ class BrandRepository : IBrandRepository{
         return _selectedBrand as Brand
     }
 
-    override fun getDefault(): ArrayList<Brand> {
+    override fun getDefault(context: Context): ArrayList<Brand> {
         val brands = ArrayList<Brand>()
 
-        brands.add(Brand("Audi", R.drawable.audi_logo))
-        brands.add(Brand("Mercedes-Benz", R.drawable.mercedes_benz_logo))
-        brands.add(Brand("BMW", R.drawable.bmw_logo))
-        brands.add(Brand("Citroen", R.drawable.citroen_logo))
-        brands.add(Brand("Peugeot", R.drawable.peugeot_logo))
-        brands.add(Brand("Dacia", R.drawable.dacia_logo))
-        brands.add(Brand("Ford", R.drawable.ford_logo))
-        brands.add(Brand("Daewoo", R.drawable.daewoo_logo))
-        brands.add(Brand("Fiat", R.drawable.fiat_automobiles_logo))
-        brands.add(Brand("Ferrari", R.drawable.ferrari_logo))
-        brands.add(Brand("Bugatti", R.drawable.bugatti_logo))
-        brands.add(Brand("Lamborghini", R.drawable.lamborghini_logo))
-        brands.add(Brand("Dodge", R.drawable.dodge_logo))
-        brands.add(Brand("Chevrolet", R.drawable.chevrolet_logo))
+        brands.add(Brand("Audi",
+            BitmapFactory.decodeResource(context.resources, R.drawable.audi_logo)))
+        brands.add(Brand("Mercedes-Benz",
+            BitmapFactory.decodeResource(context.resources, R.drawable.mercedes_benz_logo)))
+        brands.add(Brand("BMW",
+            BitmapFactory.decodeResource(context.resources, R.drawable.bmw_logo)))
+        brands.add(Brand("Citroen",
+            BitmapFactory.decodeResource(context.resources, R.drawable.citroen_logo)))
+        brands.add(Brand("Peugeot",
+            BitmapFactory.decodeResource(context.resources, R.drawable.peugeot_logo)))
+        brands.add(Brand("Dacia",
+            BitmapFactory.decodeResource(context.resources, R.drawable.dacia_logo)))
+        brands.add(Brand("Ford",
+            BitmapFactory.decodeResource(context.resources, R.drawable.ford_logo)))
+        brands.add(Brand("Daewoo",
+            BitmapFactory.decodeResource(context.resources, R.drawable.daewoo_logo)))
+        brands.add(Brand("Fiat",
+            BitmapFactory.decodeResource(context.resources, R.drawable.fiat_automobiles_logo)))
+        brands.add(Brand("Ferrari",
+            BitmapFactory.decodeResource(context.resources, R.drawable.ferrari_logo)))
+        brands.add(Brand("Bugatti",
+            BitmapFactory.decodeResource(context.resources, R.drawable.bugatti_logo)))
+        brands.add(Brand("Lamborghini",
+            BitmapFactory.decodeResource(context.resources, R.drawable.lamborghini_logo)))
+        brands.add(Brand("Dodge",
+            BitmapFactory.decodeResource(context.resources, R.drawable.dodge_logo)))
+        brands.add(Brand("Chevrolet",
+            BitmapFactory.decodeResource(context.resources, R.drawable.chevrolet_logo)))
 
         //sort alphabetically
         val sortedBrands = brands.sortedWith { brand1, brand2 ->

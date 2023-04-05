@@ -1,3 +1,5 @@
 package com.main.models
 
-class Brand(val name: String, val imageResource: Int)
+import android.graphics.Bitmap
+
+class Brand(val name: String, val imageResource: Bitmap)

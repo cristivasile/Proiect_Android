@@ -3,26 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/BrandsFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/BrandsFragment"
         android:name="com.main.VehicleBrandsFragment"
         android:label="@string/vehicle_brands_fragment_label"
         tools:layout="@layout/vehicles_brands_fragment">
-
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_BrandsFragment_to_ModelsFragment2"
+            app:destination="@id/ModelsFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/ModelsFragment"
         android:name="com.main.VehicleModelsFragment"
         android:label="@string/vehicle_models_fragment_label"
         tools:layout="@layout/vehicles_models_fragment">
-
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_ModelsFragment_to_BrandsFragment2"
+            app:destination="@id/BrandsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/AddBrandFragment"
+        android:name="com.main.VehiclesAddBrandFragment"
+        android:label="vehicles_add_brand_fragment"
+        tools:layout="@layout/vehicles_add_brand_fragment" />
+    <fragment
+        android:id="@+id/AddModelFragment"
+        android:name="com.main.VehiclesAddModelFragment"
+        android:label="vehicles_add_model_fragment"
+        tools:layout="@layout/vehicles_add_model_fragment" />
 </navigation>

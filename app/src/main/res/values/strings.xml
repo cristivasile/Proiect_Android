@@ -14,4 +14,11 @@
     <string name="nav_drawer_header_title">Vehicle info app</string>
     <string name="open">Open nav drawer</string>
     <string name="close">Close nav drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_brand_name_label">Brand name</string>
+    <string name="add_brand_title">Add brand</string>
+    <string name="vehicles_add_brand_button_text">Add brand</string>
+    <string name="add_brand_select_image_button">Select image</string>
+    <string name="add_brand_selected_image_preview">selected image preview</string>
 </resources>

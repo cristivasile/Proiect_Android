@@ -45,7 +45,7 @@ class BrandsRecyclerViewAdapter (private val mBrands: ArrayList<Brand>, private 
         val textView = holder.brandTextView
         textView.text = brand.name
         val imageView = holder.brandImageView
-        imageView.setImageResource(brand.imageResource)
+        imageView.setImageBitmap(brand.imageResource)
     }
 
     @SuppressLint("NotifyDataSetChanged")
