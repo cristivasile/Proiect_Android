@@ -21,4 +21,7 @@
     <string name="vehicles_add_brand_button_text">Add brand</string>
     <string name="add_brand_select_image_button">Select image</string>
     <string name="add_brand_selected_image_preview">selected image preview</string>
+    <string name="add_brand_success">Vehicle successfully added</string>
+    <string name="add_brand_image_fail">Please add an image</string>
+    <string name="add_brand_name_fail">Please input a brand name</string>
 </resources>

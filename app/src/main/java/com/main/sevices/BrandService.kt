@@ -5,8 +5,10 @@ import com.main.models.Brand
 import com.main.repositories.IBrandRepository
 
 class BrandService(private val brandRepository: IBrandRepository) {
-    fun getDefaultBrands(context: Context): ArrayList<Brand> = brandRepository.getDefault(context)
+    fun addBrand(brand: Brand) = brandRepository.addBrand(brand, true)
     fun getBrands(): ArrayList<Brand> = brandRepository.getAll()
+    fun getSelectedBrand() : Brand = brandRepository.getSelectedBrand()
+    fun getDefaultBrands(context: Context): ArrayList<Brand> = brandRepository.getDefault(context)
     fun setBrands(brands: ArrayList<Brand>) = brandRepository.setBrands(brands)
-    fun addBrand(brand: Brand) = brandRepository.addBrand(brand)
+    fun setSelectedBrand(brand: Brand) = brandRepository.setSelectedBrand(brand.name    )
 }

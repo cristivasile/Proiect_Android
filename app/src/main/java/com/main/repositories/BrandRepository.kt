@@ -10,7 +10,7 @@ import com.main.models.Brand
 
 interface IBrandRepository {
     fun getAll(): ArrayList<Brand>
-    fun addBrand(brand : Brand)
+    fun addBrand(brand : Brand, sort: Boolean = false)
     fun addBrands(brands : List<Brand>)
     fun setBrands(brands: List<Brand>)
     fun setSelectedBrand(brandName: String)
@@ -27,13 +27,25 @@ class BrandRepository : IBrandRepository{
         return ArrayList(_brands);
     }
 
-    override fun addBrand(brand : Brand) {
+    override fun addBrand(brand : Brand, sort: Boolean) {
         val filteredBrands = _brands.filter { x -> x.name.lowercase() == brand.name.lowercase() }
 
         if (filteredBrands.isNotEmpty())
             throw Exception("Brand already exists")
 
         _brands.add(brand);
+
+        if (sort){
+            val sortedBrands = _brands.sortedWith { brand1, brand2 ->
+                when {
+                    brand1.name > brand2.name -> 1
+                    brand1.name < brand2.name -> -1
+                    else -> 0
+                }
+            }
+            _brands.clear()
+            _brands.addAll(sortedBrands)
+        }
     }
 
     override fun addBrands(brands : List<Brand>) {
@@ -47,8 +59,10 @@ class BrandRepository : IBrandRepository{
 
     override fun setSelectedBrand(brandName: String) {
         for (brand in _brands)
-            if (brand.name.lowercase() == brandName.lowercase())
+            if (brand.name.lowercase() == brandName.lowercase()) {
                 _selectedBrand = brand
+                return
+            }
 
         throw Exception("No brand with the given name was found!")
     }

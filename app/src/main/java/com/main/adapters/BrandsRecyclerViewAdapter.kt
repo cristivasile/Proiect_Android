@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.R
 import com.main.models.Brand
@@ -14,7 +15,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import org.koin.java.KoinJavaComponent.inject
 
-class BrandsRecyclerViewAdapter (private val brandService: BrandService) : RecyclerView.Adapter<BrandsRecyclerViewAdapter.ViewHolder>() {
+class BrandsRecyclerViewAdapter (private val brandService: BrandService, private val navController: NavController) : RecyclerView.Adapter<BrandsRecyclerViewAdapter.ViewHolder>() {
 
     private val brands: ArrayList<Brand> = brandService.getBrands()
 
@@ -48,10 +49,15 @@ class BrandsRecyclerViewAdapter (private val brandService: BrandService) : Recyc
         textView.text = brand.name
         val imageView = holder.brandImageView
         imageView.setImageBitmap(brand.imageResource)
+
+        holder.itemView.setOnClickListener {
+            brandService.setSelectedBrand(brand)
+            navController.navigate(R.id.ModelsFragment)
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public fun filterBrands(filter: String) {
+    fun filterBrands(filter: String) {
         val filteredBrands = brandService.getBrands().filter { brand -> brand.name.lowercase().contains(filter.lowercase()) }
 
         brands.clear()

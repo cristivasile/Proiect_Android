@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.R
@@ -21,9 +24,10 @@ import org.koin.android.ext.android.inject
 class VehicleBrandsFragment : Fragment() {
 
     private var _binding: VehiclesBrandsFragmentBinding? = null
-    private lateinit var recyclerView: RecyclerView;
-    private lateinit var recyclerAdapter: BrandsRecyclerViewAdapter;
     private val brandService : BrandService by inject()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerAdapter: BrandsRecyclerViewAdapter
+    private lateinit var navController: NavController
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -44,12 +48,15 @@ class VehicleBrandsFragment : Fragment() {
         // Lookup the recyclerview in activity layout
         recyclerView = view.findViewById<View>(R.id.brands_list) as RecyclerView
 
+        navController = this.findNavController()
+
         // Create adapter passing in brands
-        recyclerAdapter = BrandsRecyclerViewAdapter(brandService)
+        recyclerAdapter = BrandsRecyclerViewAdapter(brandService, navController)
         // Attach the adapter to the recyclerview to populate items
         recyclerView.adapter = recyclerAdapter
         // Set layout manager to position the items
         recyclerView.layoutManager = LinearLayoutManager(this.context)
+
 
         val searchBar = view.findViewById<View>(R.id.search_bar) as SearchView
 

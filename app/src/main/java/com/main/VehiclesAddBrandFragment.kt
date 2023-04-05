@@ -72,14 +72,15 @@ class VehiclesAddBrandFragment : Fragment() {
         addBrandButton.setOnClickListener{
 
             if (brandNameInput.text.toString() == ""){
-                Toast.makeText(this.context, "Please input a brand name", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, getString(R.string.add_brand_name_fail), Toast.LENGTH_SHORT).show()
             }
             else if(selectedImage == null){
-                Toast.makeText(this.context, "Please add an image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, getString(R.string.add_brand_image_fail), Toast.LENGTH_SHORT).show()
             }
             else{
                 try{
                     brandService.addBrand(Brand(brandNameInput.text.toString(), selectedImage!!))
+                    Toast.makeText(this.context, getString(R.string.add_brand_success), Toast.LENGTH_SHORT).show()
                 }
                 catch (ex: Exception){
                     Toast.makeText(this.context, ex.message, Toast.LENGTH_SHORT).show()
