@@ -85,7 +85,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:icon="@drawable/baseline_add_24"
+        app:icon="@drawable/add_icon"
         app:strokeColor="@color/white"
         android:layout_marginBottom="20dp"
         android:textColor="@color/white"

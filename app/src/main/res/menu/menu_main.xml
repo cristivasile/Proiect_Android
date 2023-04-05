@@ -1,11 +1,18 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_main"
-        android:title="@string/action_main_string"/>
+        android:title="@string/action_main_string"
+        app:showAsAction="ifRoom|withText"
+        android:icon="@drawable/home_icon"/>
     <item
         android:id="@+id/action_add_brand"
-        android:title="@string/action_add_brand_string"/>
+        android:title="@string/action_add_brand_string"
+        app:showAsAction="ifRoom|withText"
+        android:icon="@drawable/add_icon"/>
     <item
         android:id="@+id/action_add_model"
-        android:title="@string/action_add_model_string"/>
+        android:title="@string/action_add_model_string"
+        app:showAsAction="ifRoom|withText"
+        android:icon="@drawable/add_icon"/>
 </menu>
