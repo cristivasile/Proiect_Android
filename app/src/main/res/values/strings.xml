@@ -24,4 +24,12 @@
     <string name="add_brand_success">Vehicle successfully added</string>
     <string name="add_brand_image_fail">Please add an image</string>
     <string name="add_brand_name_fail">Please input a brand name</string>
+    <string name="back_button_text">Back</string>
+    <string name="add_model_title">Add model</string>
+    <string name="add_model_button_text">Add model</string>
+    <string name="add_model_name_text">Model name</string>
+    <string name="add_model_nr_of_seats_label">Nr. of seats</string>
+    <string name="add_model_start_year_label">Start year</string>
+    <string name="add_model_description_label">Add descripiton</string>
+    <string name="add_model_take_photo_button">Take photo</string>
 </resources>

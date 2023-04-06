@@ -9,13 +9,14 @@ import com.example.androidproject.R
 import com.main.models.Brand
 
 interface IBrandRepository {
-    fun getAll(): ArrayList<Brand>
     fun addBrand(brand : Brand, sort: Boolean = false)
     fun addBrands(brands : List<Brand>)
+    fun getAll(): ArrayList<Brand>
+    fun getBrandByName(name: String): Brand?
+    fun getDefault(context: Context): ArrayList<Brand>
+    fun getSelectedBrand(): Brand
     fun setBrands(brands: List<Brand>)
     fun setSelectedBrand(brandName: String)
-    fun getSelectedBrand(): Brand
-    fun getDefault(context: Context): ArrayList<Brand>
 }
 
 class BrandRepository : IBrandRepository{
@@ -25,6 +26,13 @@ class BrandRepository : IBrandRepository{
 
     override fun getAll(): ArrayList<Brand> {
         return ArrayList(_brands);
+    }
+
+    override fun getBrandByName(name: String): Brand? {
+        for (brand in _brands)
+            if(brand.name.lowercase() == name.lowercase())
+                return brand
+        return null
     }
 
     override fun addBrand(brand : Brand, sort: Boolean) {
@@ -49,12 +57,13 @@ class BrandRepository : IBrandRepository{
     }
 
     override fun addBrands(brands : List<Brand>) {
-        _brands.addAll(brands)
+        for (brand in brands)
+            addBrand(brand, true)
     }
 
     override fun setBrands(brands: List<Brand>) {
         _brands.clear()
-        _brands.addAll(brands)
+        addBrands(brands)
     }
 
     override fun setSelectedBrand(brandName: String) {

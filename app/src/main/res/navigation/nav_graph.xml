@@ -11,7 +11,7 @@
         android:label="@string/vehicle_brands_fragment_label"
         tools:layout="@layout/vehicles_brands_fragment">
         <action
-            android:id="@+id/action_BrandsFragment_to_ModelsFragment2"
+            android:id="@+id/action_BrandsFragment_to_ModelsFragment"
             app:destination="@id/ModelsFragment" />
     </fragment>
 
@@ -21,7 +21,7 @@
         android:label="@string/vehicle_models_fragment_label"
         tools:layout="@layout/vehicles_models_fragment">
         <action
-            android:id="@+id/action_ModelsFragment_to_BrandsFragment2"
+            android:id="@+id/action_ModelsFragment_to_BrandsFragment"
             app:destination="@id/BrandsFragment" />
     </fragment>
     <fragment

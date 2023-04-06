@@ -16,11 +16,11 @@ import org.koin.core.context.GlobalContext.startKoin
 
 class VehiclesActivity : AppCompatActivity() {
 
-    private lateinit var binding: VehiclesActivityBinding
-    private lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var navController: NavController
-    private val brandService : BrandService by inject()
-    private val modelService : ModelService by inject()
+    private lateinit var _binding: VehiclesActivityBinding
+    private lateinit var _toggle: ActionBarDrawerToggle
+    private lateinit var _navController: NavController
+    private val _brandService : BrandService by inject()
+    private val _modelService : ModelService by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,37 +31,37 @@ class VehiclesActivity : AppCompatActivity() {
         }
 
         //initialize brands
-        brandService.setBrands(brandService.getDefaultBrands(this))
+        _brandService.setBrands(_brandService.getDefaultBrands(this)) // pass context to
         //initialize models
-        modelService.setModels(modelService.getDefaultModels())
+        _modelService.setModels(_modelService.getDefaultModels())
 
-        binding = VehiclesActivityBinding
+        _binding = VehiclesActivityBinding
             .inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(_binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(_binding.toolbar)
 
         //initialize nav drawer
-        binding.apply{
-            toggle = ActionBarDrawerToggle(this@VehiclesActivity, navDrawerLayout, R.string.open, R.string.close)
-            navDrawerLayout.addDrawerListener(toggle)
-            toggle.syncState()
+        _binding.apply{
+            _toggle = ActionBarDrawerToggle(this@VehiclesActivity, navDrawerLayout, R.string.open, R.string.close)
+            navDrawerLayout.addDrawerListener(_toggle)
+            _toggle.syncState()
 
             //add menu icon to the action bar
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-            navController = findNavController(R.id.nav_host_fragment_content_main)
+            _navController = findNavController(R.id.nav_host_fragment_content_main)
 
             navView.setNavigationItemSelectedListener {
                 when (it.itemId) {
                     R.id.action_main -> {
-                        navController.navigate(R.id.BrandsFragment)
+                        _navController.navigate(R.id.BrandsFragment)
                     }
                     R.id.action_add_brand -> {
-                        navController.navigate(R.id.AddBrandFragment)
+                        _navController.navigate(R.id.AddBrandFragment)
                     }
                     R.id.action_add_model -> {
-                        navController.navigate(R.id.AddModelFragment)
+                        _navController.navigate(R.id.AddModelFragment)
                     }
                 }
                 true
@@ -72,6 +72,6 @@ class VehiclesActivity : AppCompatActivity() {
 
     //bind menu icon to set the nav drawer toggle
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return toggle.onOptionsItemSelected(item)
+        return _toggle.onOptionsItemSelected(item)
     }
 }

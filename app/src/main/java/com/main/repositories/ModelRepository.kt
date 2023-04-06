@@ -5,14 +5,16 @@ import com.main.models.Brand
 import com.main.models.Model
 
 interface IModelRepository {
-    fun getAll(): ArrayList<Model>
-    fun getModelsByBrand(brand: Brand): ArrayList<Model>
+
+    fun addModel(model : Model, sort: Boolean)
     fun addModels(models : List<Model>)
-    fun setModels(models: List<Model>)
+    fun getAll(): ArrayList<Model>
     fun getDefault(): ArrayList<Model>
+    fun getModelsByBrand(brand: Brand): ArrayList<Model>
+    fun setModels(models: List<Model>)
 }
 
-class ModelRepository: IModelRepository {
+class ModelRepository(): IModelRepository {
 
     private val _models = arrayListOf<Model>()
 
@@ -25,13 +27,44 @@ class ModelRepository: IModelRepository {
             -> model.brandName.lowercase() == brand.name.lowercase() })
     }
 
+    override fun addModel(model: Model, sort: Boolean) {
+        //check year
+        if(model.startYear < 1900 || model.startYear > 2023)
+            throw Exception("Incorrect start year! (Range: 1900 - 2023)")
+
+        //check seats
+        if(model.nrOfSeats < 1 || model.nrOfSeats > 100)
+            throw Exception("Incorrect number of seats! (Range: 1 - 100)")
+
+        val filteredModels = _models.filter { x -> x.modelName.lowercase() == model.modelName.lowercase()
+                && x.brandName.lowercase() == model.brandName.lowercase()}
+
+        if (filteredModels.isNotEmpty())
+            throw Exception("Model already exists")
+
+        _models.add(model);
+
+        if (sort){
+            val sortedModels = _models.sortedWith { model1, model2 ->
+                when {
+                    model1.modelName > model2.modelName -> 1
+                    model1.modelName < model2.modelName -> -1
+                    else -> 0
+                }
+            }
+            _models.clear()
+            _models.addAll(sortedModels)
+        }
+    }
+
     override fun addModels(models: List<Model>) {
-        _models.addAll(models)
+        for (model in models)
+            addModel(model, true)
     }
 
     override fun setModels(models: List<Model>) {
         _models.clear()
-        _models.addAll(models)
+        addModels(models)
     }
 
     override fun getDefault(): ArrayList<Model> {

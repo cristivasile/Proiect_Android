@@ -1,16 +1,23 @@
 package com.main
 
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.androidproject.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.google.android.material.textfield.TextInputEditText
+import com.main.models.Brand
+import com.main.sevices.BrandService
+import com.main.sevices.ModelService
+import org.koin.android.ext.android.inject
 
 /**
  * A simple [Fragment] subclass.
@@ -18,15 +25,26 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class VehiclesAddModelFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var _addImageButton: Button
+    private lateinit var _addModelButton: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var _brandNameInput: TextInputEditText
+    private lateinit var _previewImageView: ImageView
+
+    private var _selectedImage: Bitmap? = null
+    private val _brandService : BrandService by inject()
+    private val _modelService : ModelService by inject()
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        try {
+            if (uri != null){
+                val chosenImage: Bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, uri)
+                _previewImageView.setImageBitmap(chosenImage)
+                _selectedImage = chosenImage
+            }
+        }
+        catch (ex: Exception){
+            Toast.makeText(this.context, ex.message, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -38,23 +56,35 @@ class VehiclesAddModelFragment : Fragment() {
         return inflater.inflate(R.layout.vehicles_add_model_fragment, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment VehiclesAddModelFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            VehiclesAddModelFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _addImageButton = view.findViewById(R.id.selectImageButton) as Button
+        _addModelButton = view.findViewById(R.id.addBrandButton) as Button
+        _brandNameInput = view.findViewById(R.id.addBrandNameTextInput) as TextInputEditText
+        _previewImageView = view.findViewById(R.id.brandPreviewImage) as ImageView
+
+        // addImageButton to open gallery picker
+        _addImageButton.setOnClickListener{
+            getContent.launch("image/*")
+        }
+
+        // addBrand action
+        _addBrandButton.setOnClickListener{
+
+            if (_brandNameInput.text.toString() == ""){
+                Toast.makeText(this.context, getString(R.string.add_brand_name_fail), Toast.LENGTH_SHORT).show()
+            }
+            else if(_selectedImage == null){
+                Toast.makeText(this.context, getString(R.string.add_brand_image_fail), Toast.LENGTH_SHORT).show()
+            }
+            else{
+                try{
+                    _brandService.addBrand(Brand(_brandNameInput.text.toString(), _selectedImage!!))
+                    Toast.makeText(this.context, getString(R.string.add_brand_success), Toast.LENGTH_SHORT).show()
+                }
+                catch (ex: Exception){
+                    Toast.makeText(this.context, ex.message, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
     }
 }

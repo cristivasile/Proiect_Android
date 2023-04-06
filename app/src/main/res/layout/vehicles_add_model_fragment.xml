@@ -1,13 +1,223 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.main.VehiclesAddModelFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.main.VehiclesAddModelFragment"
+    android:background="@color/main">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Add model fragment" />
+        android:id="@+id/addModelTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:text="@string/add_model_title"/>
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/backgroundImageWhite"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="@string/background_image_description"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <ScrollView
+        android:id="@+id/modelScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addModelTitle">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/imageButtonsLayout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="50dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/selectModelImageButton"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_brand_select_image_button"
+                    android:textColor="@color/white"
+                    app:icon="@drawable/image_icon"
+                    app:iconTint="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:rippleColor="@color/white"
+                    app:strokeColor="@color/white" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/main"/>
+
+                <Button
+                    android:id="@+id/addModelImageButton"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_model_take_photo_button"
+                    android:textColor="@color/white"
+                    app:icon="@drawable/camera_icon"
+                    app:iconTint="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:rippleColor="@color/white"
+                    app:strokeColor="@color/white" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <ImageView
+                android:id="@+id/brandPreviewImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:contentDescription="@string/add_brand_selected_image_preview"
+                app:layout_constraintTop_toBottomOf="@id/imageButtonsLayout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/addModelBrandNameTextLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/add_brand_name_label"
+                app:layout_constraintTop_toBottomOf="@id/brandPreviewImage">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addModelBrandNameTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/addModelNameTextLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/add_model_name_text"
+                app:layout_constraintTop_toBottomOf="@id/addModelBrandNameTextLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addModelNameTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/addModelBodyTypeTextLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/add_model_name_text"
+                app:layout_constraintTop_toBottomOf="@id/addModelNameTextLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addModelBodyTypeTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/numeric_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/addModelNameTextLayout">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/addModelNumberOfSeatsTextLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/add_model_nr_of_seats_label">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addModelNumberOfSeatsTextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/main"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/addModelStartYearTextLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/add_model_start_year_label">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addModelStartYearTextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/addModelDescriptionTextLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/add_model_description_label"
+                app:layout_constraintTop_toBottomOf="@id/numeric_linear_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addModelDescriptionTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/addModelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_model_button_text"
+        style="?attr/materialButtonOutlinedStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:icon="@drawable/add_icon"
+        app:strokeColor="@color/white"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        app:iconTint="@color/white"
+        app:rippleColor="@color/green"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.R
 import com.example.androidproject.databinding.VehiclesBrandsFragmentBinding
 import com.main.adapters.BrandsRecyclerViewAdapter
-import com.main.models.Brand
 import com.main.sevices.BrandService
 import org.koin.android.ext.android.inject
 
@@ -24,10 +22,10 @@ import org.koin.android.ext.android.inject
 class VehicleBrandsFragment : Fragment() {
 
     private var _binding: VehiclesBrandsFragmentBinding? = null
-    private val brandService : BrandService by inject()
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var recyclerAdapter: BrandsRecyclerViewAdapter
-    private lateinit var navController: NavController
+    private val _brandService : BrandService by inject()
+    private lateinit var _recyclerView: RecyclerView
+    private lateinit var _recyclerAdapter: BrandsRecyclerViewAdapter
+    private lateinit var _navController: NavController
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -45,32 +43,28 @@ class VehicleBrandsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Lookup the recyclerview in activity layout
-        recyclerView = view.findViewById<View>(R.id.brands_list) as RecyclerView
+        _recyclerView = view.findViewById<View>(R.id.brandsList) as RecyclerView
 
-        navController = this.findNavController()
+        _navController = this.findNavController()
 
         // Create adapter passing in brands
-        recyclerAdapter = BrandsRecyclerViewAdapter(brandService, navController)
-        // Attach the adapter to the recyclerview to populate items
-        recyclerView.adapter = recyclerAdapter
-        // Set layout manager to position the items
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        _recyclerAdapter = BrandsRecyclerViewAdapter(_brandService, _navController)
+        _recyclerView.adapter = _recyclerAdapter
+        _recyclerView.layoutManager = LinearLayoutManager(this.context)
 
-
-        val searchBar = view.findViewById<View>(R.id.search_bar) as SearchView
+        val searchBar = view.findViewById<View>(R.id.brandsSearchBar) as SearchView
 
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
-                    recyclerAdapter.filterBrands(query)
+                    _recyclerAdapter.filterBrands(query)
                 }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
-                    recyclerAdapter.filterBrands(newText)
+                    _recyclerAdapter.filterBrands(newText)
                 }
                 return true
             }

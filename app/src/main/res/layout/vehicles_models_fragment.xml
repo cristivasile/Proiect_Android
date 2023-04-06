@@ -7,22 +7,41 @@
     android:layout_height="match_parent"
     tools:context="com.main.VehicleModelsFragment">
 
-    <TextView
-        android:id="@+id/textview_second"
+    <Button
+        android:id="@+id/modelsBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
+        android:layout_marginTop  ="10dp"
+        android:layout_marginStart ="10dp"
+        android:text="@string/back_button_text"
+        app:layout_constraintTop_toTopOf = "parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:icon="@drawable/back_icon"
+        app:strokeColor="@color/white"
+        app:iconTint="@color/white"
+        app:rippleColor="@color/white"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/modelsSearchBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/modelsBackButton"
+        app:queryHint="@string/brands_search_hint"/>
 
-    <Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/previous"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/modelsList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
+        app:layout_constraintTop_toBottomOf="@id/modelsSearchBar"
+        app:layout_constraintVertical_bias="0"
+        tools:listitem="@layout/vehicles_list_item_view" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

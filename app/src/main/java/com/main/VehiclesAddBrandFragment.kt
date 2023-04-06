@@ -24,22 +24,21 @@ import org.koin.android.ext.android.inject
  * create an instance of this fragment.
  */
 class VehiclesAddBrandFragment : Fragment() {
-    private lateinit var addImageButton: Button
-    private lateinit var addBrandButton: Button
+    private lateinit var _addImageButton: Button
+    private lateinit var _addBrandButton: Button
 
-    private lateinit var brandNameInput: TextInputEditText
-    private lateinit var previewImageView: ImageView
+    private lateinit var _brandNameInput: TextInputEditText
+    private lateinit var _previewImageView: ImageView
 
-    private var selectedImage: Bitmap? = null
-
-    private val brandService : BrandService by inject()
+    private var _selectedImage: Bitmap? = null
+    private val _brandService : BrandService by inject()
 
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         try {
             if (uri != null){
                 val chosenImage: Bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, uri)
-                previewImageView.setImageBitmap(chosenImage)
-                selectedImage = chosenImage
+                _previewImageView.setImageBitmap(chosenImage)
+                _selectedImage = chosenImage
             }
         }
         catch (ex: Exception){
@@ -58,28 +57,28 @@ class VehiclesAddBrandFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        addImageButton = view.findViewById(R.id.selectImageButton) as Button
-        addBrandButton = view.findViewById(R.id.addBrandButton) as Button
-        brandNameInput = view.findViewById(R.id.addBrandNameTextInput) as TextInputEditText
-        previewImageView = view.findViewById(R.id.brandPreviewImage) as ImageView
+        _addImageButton = view.findViewById(R.id.selectImageButton) as Button
+        _addBrandButton = view.findViewById(R.id.addBrandButton) as Button
+        _brandNameInput = view.findViewById(R.id.addBrandNameTextInput) as TextInputEditText
+        _previewImageView = view.findViewById(R.id.brandPreviewImage) as ImageView
 
         // addImageButton to open gallery picker
-        addImageButton.setOnClickListener{
+        _addImageButton.setOnClickListener{
             getContent.launch("image/*")
         }
 
         // addBrand action
-        addBrandButton.setOnClickListener{
+        _addBrandButton.setOnClickListener{
 
-            if (brandNameInput.text.toString() == ""){
+            if (_brandNameInput.text.toString() == ""){
                 Toast.makeText(this.context, getString(R.string.add_brand_name_fail), Toast.LENGTH_SHORT).show()
             }
-            else if(selectedImage == null){
+            else if(_selectedImage == null){
                 Toast.makeText(this.context, getString(R.string.add_brand_image_fail), Toast.LENGTH_SHORT).show()
             }
             else{
                 try{
-                    brandService.addBrand(Brand(brandNameInput.text.toString(), selectedImage!!))
+                    _brandService.addBrand(Brand(_brandNameInput.text.toString(), _selectedImage!!))
                     Toast.makeText(this.context, getString(R.string.add_brand_success), Toast.LENGTH_SHORT).show()
                 }
                 catch (ex: Exception){

@@ -8,7 +8,7 @@
     tools:context="com.main.VehicleBrandsFragment">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_bar"
+        android:id="@+id/brandsSearchBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
@@ -18,15 +18,15 @@
         app:queryHint="@string/brands_search_hint"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/brands_list"
+        android:id="@+id/brandsList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintTop_toBottomOf="@id/brandsSearchBar"
         app:layout_constraintVertical_bias="0"
-        tools:listitem="@layout/vehicles_brand_item_view" />
+        tools:listitem="@layout/vehicles_list_item_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

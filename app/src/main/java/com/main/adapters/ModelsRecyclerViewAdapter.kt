@@ -9,14 +9,13 @@ import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.R
-import com.main.models.Brand
 import com.main.sevices.BrandService
-import java.util.*
-import kotlin.collections.ArrayList
+import com.main.sevices.ModelService
+import com.main.models.Model
 
-class BrandsRecyclerViewAdapter (private val _brandService: BrandService, private val _navController: NavController) : RecyclerView.Adapter<BrandsRecyclerViewAdapter.ViewHolder>() {
+class ModelsRecyclerViewAdapter (private val _brandService: BrandService, private val _modelService: ModelService, private val _navController: NavController) : RecyclerView.Adapter<ModelsRecyclerViewAdapter.ViewHolder>() {
 
-    private val _brands: ArrayList<Brand> = _brandService.getBrands()
+    private val _models: ArrayList<Model> = _modelService.getModelsByBrand(_brandService.getSelectedBrand())
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
@@ -37,30 +36,30 @@ class BrandsRecyclerViewAdapter (private val _brandService: BrandService, privat
     }
 
     override fun getItemCount(): Int {
-        return _brands.count()
+        return _models.count()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Get the data model based on position
-        val brand: Brand = _brands[position]
+        val model: Model = _models[position]
         // Set item views based on your views and data model
         val textView = holder.brandTextView
-        textView.text = brand.name
+        textView.text = model.modelName
         val imageView = holder.brandImageView
-        imageView.setImageBitmap(brand.imageResource)
+        imageView.setImageBitmap(model.image)
 
         holder.itemView.setOnClickListener {
-            _brandService.setSelectedBrand(brand)
-            _navController.navigate(R.id.action_BrandsFragment_to_ModelsFragment)
+            //TODO - model click
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun filterBrands(filter: String) {
-        val filteredBrands = _brandService.getBrands().filter { brand -> brand.name.lowercase().contains(filter.lowercase()) }
+    fun filterModels(filter: String) {
+        val filteredModels =_modelService.getModelsByBrand(_brandService.getSelectedBrand())
+            .filter { model -> model.modelName.lowercase().contains(filter.lowercase()) }
 
-        _brands.clear()
-        _brands.addAll(filteredBrands)
+        _models.clear()
+        _models.addAll(filteredModels)
         notifyDataSetChanged()
     }
 }
