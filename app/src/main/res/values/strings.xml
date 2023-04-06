@@ -16,7 +16,7 @@
     <string name="close">Close nav drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="add_brand_name_label">Brand name</string>
+    <string name="add_brand_name_hint">Brand name</string>
     <string name="add_brand_title">Add brand</string>
     <string name="vehicles_add_brand_button_text">Add brand</string>
     <string name="add_brand_select_image_button">Select image</string>
@@ -27,9 +27,17 @@
     <string name="back_button_text">Back</string>
     <string name="add_model_title">Add model</string>
     <string name="add_model_button_text">Add model</string>
-    <string name="add_model_name_text">Model name</string>
-    <string name="add_model_nr_of_seats_label">Nr. of seats</string>
-    <string name="add_model_start_year_label">Start year</string>
-    <string name="add_model_description_label">Add descripiton</string>
+    <string name="add_model_name_hint">Model name</string>
+    <string name="add_model_nr_of_seats_hint">Nr. of seats</string>
+    <string name="add_model_start_year_hint">Start year</string>
+    <string name="add_model_description_hint">Add descripiton</string>
     <string name="add_model_take_photo_button">Take photo</string>
+    <string name="add_model_invalid_brand_fail">The given brand does not exist!</string>
+    <string name="add_model_name_fail">Please input a model name</string>
+    <string name="add_model_success">Model successfully added!</string>
+    <string name="add_model_year_fail">Please input a year</string>
+    <string name="add_model_seats_fail">Please input the number of seats</string>
+    <string name="add_model_body_type_hint">Body type</string>
+    <string name="add_model_bodytype_fail">Please add a body type</string>
+    <string name="camera_permission_required_message">Camera permission required</string>
 </resources>

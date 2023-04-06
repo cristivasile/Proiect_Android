@@ -53,7 +53,7 @@
         android:id="@+id/addBrandNameTextLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/add_brand_name_label"
+        android:hint="@string/add_brand_name_hint"
         app:layout_constraintTop_toTopOf="@id/selectImageButton"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
