@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -19,7 +20,7 @@ import org.koin.android.ext.android.inject
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class VehicleBrandsFragment : Fragment() {
+class VehiclesBrandsFragment : Fragment() {
 
     private var _binding: VehiclesBrandsFragmentBinding? = null
     private val _brandService : BrandService by inject()
@@ -76,5 +77,9 @@ class VehicleBrandsFragment : Fragment() {
         _binding = null
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.title = getString(R.string.brands_actionbar_title)
+    }
 }

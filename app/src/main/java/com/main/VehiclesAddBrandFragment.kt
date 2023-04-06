@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.example.androidproject.R
 import com.google.android.material.textfield.TextInputEditText
 import com.main.models.Brand
@@ -87,5 +88,11 @@ class VehiclesAddBrandFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.title = getString(R.string.add_brand_actionbar_title)
     }
 }

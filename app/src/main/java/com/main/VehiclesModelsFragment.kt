@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -21,12 +23,13 @@ import org.koin.android.ext.android.inject
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class VehicleModelsFragment : Fragment() {
+class VehiclesModelsFragment : Fragment() {
 
     private var _binding: VehiclesModelsFragmentBinding? = null
     private lateinit var _backButton: Button
     private lateinit var _navController: NavController
     private lateinit var _recyclerView: RecyclerView
+    private lateinit var _titleTextView: TextView
     private lateinit var _recyclerAdapter: ModelsRecyclerViewAdapter
 
     private val _brandService : BrandService by inject()
@@ -43,16 +46,23 @@ class VehicleModelsFragment : Fragment() {
         _binding = VehiclesModelsFragmentBinding.inflate(inflater, container, false)
 
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //set current title
+        _titleTextView = view.findViewById<View>(R.id.currentBrandTextView) as TextView
+        _titleTextView.text = buildString {
+        append(_brandService.getSelectedBrand().name)
+        append(" ")
+        append(getString(R.string.models_string))
+        append(":")
+        }
+
         _navController = this.findNavController()
         _backButton = view.findViewById<View>(R.id.modelsBackButton) as Button
 
-        // addImageButton to open gallery picker
         _backButton.setOnClickListener{
             _navController.navigate(R.id.action_ModelsFragment_to_BrandsFragment)
         }
@@ -88,5 +98,11 @@ class VehicleModelsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.title = "View models"
     }
 }

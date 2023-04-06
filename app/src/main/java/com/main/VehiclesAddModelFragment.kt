@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -12,18 +11,16 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.FileProvider
 import com.example.androidproject.BuildConfig
 import com.example.androidproject.R
@@ -154,7 +151,7 @@ class VehiclesAddModelFragment : Fragment() {
                     Toast.makeText(this.context, getString(R.string.add_model_name_fail), Toast.LENGTH_SHORT).show()
                 }
                 else if (_bodyTypeInput.text.toString() == ""){
-                    Toast.makeText(this.context, getString(R.string.add_model_bodytype_fail), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.context, getString(R.string.add_model_body_type_fail), Toast.LENGTH_SHORT).show()
                 }
                 else if (_yearInput.text.toString() == ""){
                     Toast.makeText(this.context, getString(R.string.add_model_year_fail), Toast.LENGTH_SHORT).show()
@@ -200,5 +197,11 @@ class VehiclesAddModelFragment : Fragment() {
             val storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
             return File.createTempFile(fileName, ".jpg", storageDir)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.title = getString(R.string.add_model_actionbar_title)
     }
 }

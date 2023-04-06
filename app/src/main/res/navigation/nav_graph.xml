@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/BrandsFragment"
-        android:name="com.main.VehicleBrandsFragment"
+        android:name="com.main.VehiclesBrandsFragment"
         android:label="@string/vehicle_brands_fragment_label"
         tools:layout="@layout/vehicles_brands_fragment">
         <action
@@ -17,12 +17,15 @@
 
     <fragment
         android:id="@+id/ModelsFragment"
-        android:name="com.main.VehicleModelsFragment"
+        android:name="com.main.VehiclesModelsFragment"
         android:label="@string/vehicle_models_fragment_label"
         tools:layout="@layout/vehicles_models_fragment">
         <action
             android:id="@+id/action_ModelsFragment_to_BrandsFragment"
             app:destination="@id/BrandsFragment" />
+        <action
+            android:id="@+id/action_ModelsFragment_to_vehicleModelDetailsFragment"
+            app:destination="@id/vehicleModelDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/AddBrandFragment"
@@ -34,4 +37,13 @@
         android:name="com.main.VehiclesAddModelFragment"
         android:label="vehicles_add_model_fragment"
         tools:layout="@layout/vehicles_add_model_fragment" />
+    <fragment
+        android:id="@+id/vehicleModelDetailsFragment"
+        android:name="com.main.VehiclesModelDetailsFragment"
+        android:label="vehicle_model_details_fragment"
+        tools:layout="@layout/vehicles_model_details_fragment" >
+        <action
+            android:id="@+id/action_vehicleModelDetailsFragment_to_ModelsFragment"
+            app:destination="@id/ModelsFragment" />
+    </fragment>
 </navigation>

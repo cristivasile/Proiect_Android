@@ -11,12 +11,14 @@ interface IModelRepository {
     fun getAll(): ArrayList<Model>
     fun getDefault(): ArrayList<Model>
     fun getModelsByBrand(brand: Brand): ArrayList<Model>
+    fun getSelectedModel(): Model
     fun setModels(models: List<Model>)
+    fun setSelectedModel(model: Model)
 }
 
-class ModelRepository(): IModelRepository {
-
+class ModelRepository: IModelRepository {
     private val _models = arrayListOf<Model>()
+    private var _selectedModel: Model? = null
 
     override fun getAll(): ArrayList<Model> {
         return ArrayList(_models);
@@ -25,6 +27,10 @@ class ModelRepository(): IModelRepository {
     override fun getModelsByBrand(brand: Brand): ArrayList<Model> {
         return ArrayList(_models.filter { model: Model
             -> model.brandName.lowercase() == brand.name.lowercase() })
+    }
+
+    override fun getSelectedModel(): Model {
+        return _selectedModel!!
     }
 
     override fun addModel(model: Model, sort: Boolean) {
@@ -42,7 +48,7 @@ class ModelRepository(): IModelRepository {
         if (filteredModels.isNotEmpty())
             throw Exception("Model already exists")
 
-        _models.add(model);
+        _models.add(model)
 
         if (sort){
             val sortedModels = _models.sortedWith { model1, model2 ->
@@ -67,37 +73,41 @@ class ModelRepository(): IModelRepository {
         addModels(models)
     }
 
+    override fun setSelectedModel(model: Model) {
+        _selectedModel = model
+    }
+
     override fun getDefault(): ArrayList<Model> {
         val models = ArrayList<Model>()
 
         models.add(Model("Audi", "TT 8N", "Coupe", nrOfSeats = 4, startYear = 1999,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Audi", "TT 8J", "Coupe", nrOfSeats = 4, startYear = 2006,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Audi", "TT 8S", "Coupe", nrOfSeats = 4, startYear = 2014,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Audi", "A4 B6", "Sedan", nrOfSeats = 5, startYear = 2000,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Audi", "A4 B6 Avant", "Wagon", nrOfSeats = 5, startYear = 2001,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Audi", "A4 B8", "Coupe", nrOfSeats = 5, startYear = 2007,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Dacia", "Logan", "Sedan", nrOfSeats = 5, startYear = 2005,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Daewoo", "Cielo", "Sedan", nrOfSeats = 5, startYear = 1994,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Daewoo", "Matiz", "Compact", nrOfSeats = 5, startYear = 1998,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Mercedes-Benz", "C Class W203", "Sedan", nrOfSeats = 5, startYear = 2001,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Mercedes-Benz", "S Class W223", "Limousine", nrOfSeats = 5, startYear = 2020,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Mercedes-Benz", "G Class W463", "Off-road", nrOfSeats = 5, startYear = 2012,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Mercedes-Benz", "GLE V167", "SUV", nrOfSeats = 7, startYear = 2019,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
         models.add(Model("Citroen", "DS III Break", "Wagon", nrOfSeats = 5, startYear = 1972,
-            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)));
+            "Sample description", Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888)))
 
         return models
     }

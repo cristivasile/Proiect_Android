@@ -49,7 +49,8 @@ class ModelsRecyclerViewAdapter (private val _brandService: BrandService, privat
         imageView.setImageBitmap(model.image)
 
         holder.itemView.setOnClickListener {
-            //TODO - model click
+            _modelService.setSelectedModel(model)
+            _navController.navigate(R.id.action_ModelsFragment_to_vehicleModelDetailsFragment)
         }
     }
 

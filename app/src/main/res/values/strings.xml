@@ -14,8 +14,6 @@
     <string name="nav_drawer_header_title">Vehicle info app</string>
     <string name="open">Open nav drawer</string>
     <string name="close">Close nav drawer</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_brand_name_hint">Brand name</string>
     <string name="add_brand_title">Add brand</string>
     <string name="vehicles_add_brand_button_text">Add brand</string>
@@ -38,6 +36,12 @@
     <string name="add_model_year_fail">Please input a year</string>
     <string name="add_model_seats_fail">Please input the number of seats</string>
     <string name="add_model_body_type_hint">Body type</string>
-    <string name="add_model_bodytype_fail">Please add a body type</string>
+    <string name="add_model_body_type_fail">Please add a body type</string>
     <string name="camera_permission_required_message">Camera permission required</string>
+    <string name="models_string">models</string>
+    <string name="view_brands_title">View brands</string>
+    <string name="add_brand_actionbar_title">Manage brands</string>
+    <string name="add_model_actionbar_title">Manage models</string>
+    <string name="brands_actionbar_title">View brands</string>
+    <string name="model_details_actionbar_title">Model details</string>
 </resources>
