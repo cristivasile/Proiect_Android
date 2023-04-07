@@ -44,4 +44,10 @@
     <string name="add_model_actionbar_title">Manage models</string>
     <string name="brands_actionbar_title">View brands</string>
     <string name="model_details_actionbar_title">Model details</string>
+    <string name="model_image">Model image</string>
+    <string name="body_type_string">Body type</string>
+    <string name="start_year_string">Start year</string>
+    <string name="seat_number_string">Seat number</string>
+    <string name="description_string">Description</string>
+    <string name="share_string">Share</string>
 </resources>
